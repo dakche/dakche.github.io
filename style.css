@@ -1,0 +1,159 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-top {
+    background: transparent;
+    width: 100%;
+    max-height: 10%;
+    color: white;
+}
+
+.nav-top .top{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.nav-top .top .top-left {
+    padding: 1% 0 0 2%;
+}
+
+.nav-top .top .top-left .logo {
+    width: auto;
+    height: 100px;
+    cursor: pointer;
+}
+
+.nav-top .top .top-center {
+    padding: 5%;
+}
+
+.nav-top .top .top-center ul{
+    list-style: none;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-top .top .top-center li a{
+    margin: 0 30px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.nav-top .top .top-center li a:hover{
+    text-decoration: underline;
+}
+
+.nav-top .top .top-right {
+    padding: 0 3% 0 0;
+}
+
+.nav-top .top .top-right .clicky {
+    background-color: gold;
+    color: black;
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.nav-top .top .top-right .clicky:hover {
+    background-color: yellow;
+}
+
+.middle {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+    color: white;
+    display: grid;
+    place-content: center;
+}
+
+.middle .content {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    border-right: 2px solid;
+    border-color: white;
+    animation: typing;
+    animation-duration: 1s;
+    animation-timing-function: steps(13, end);
+    animation: typing 1s steps(13, end) forwards, blinking 1s infinite;
+}
+
+@keyframes typing {
+    from { width: 0% }
+    to { width: 100% }
+}
+
+@keyframes blinking {
+    0% {border-right-color: transparent}
+    50% {border-right-color: white}
+    100% {border-right-color: transparent}
+}
+
+.middle-content {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.middle-content p{
+    width: 69%;
+    border: 3px dashed #fff;
+    padding: 2%;
+}
+
+.bottom {
+    margin: 0 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom ul {
+    color: white;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-items: space-evenly;
+}
+
+.bottom ul li {
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+}
+
+.bottom ul li a{
+    margin: 0px 75px 0 25px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.bottom ul li a:hover{
+    text-decoration: underline;
+}

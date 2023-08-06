@@ -2,9 +2,65 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
-        <title>Dak's Corner</title>
+        <link rel="icon" href="D.png" type="image/x-icon">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>ProjectDCC</title>
+        <script language="javascript" type="text/javascript">
+            function nuke() {
+                document.body.innerHTML="";
+                document.body.style.backgroundColor="white";
+            }
+        </script>
     </head>
     <body>
-        Hello Internet!
+        <nav class="nav-top">
+            <div class="top">
+                <div class="top-left">
+                    <img src="D.png" class="logo">
+                </div>
+                <div class="top-center">
+                    <ul>
+                        <li><a href="#">Current Projects</a></li> 
+                        <li><a href="#">The Archives</a></li>
+                        <li><a href="#">Hacks</a></li>
+                        <li><a href="#">My Mission</a></li>
+                        <li><a href="#">About Me</a></li>
+                    </ul>
+                </div>
+                <div class="top-right">
+                    <button class="clicky">Click Here!</button>
+                </div>
+            </div>
+        </nav>
+        <div class="middle">
+            <h1 class="content">Hello There.</h1>
+        </div>
+        <div class="middle-content">
+            <p>
+                Welcome to ProjectDCC, a website that showcases
+                the things I've been up to. Here is a quick guide on how to navigate this page.<br><br>
+                <b>Current Projects:</b> Projects started
+                in 2020 and after (post pandemic).<br>
+                <b>The Archives:</b> Projects started before 2020 (pre pandemic).<br>
+                <b>Hacks:</b> A collection of miscellaneous things, including
+                logs of the things I reverse-engineered, things I've modified,
+                and things I've hacked.<br>
+                <b>My Mission:</b> Details my values and the underlying principles behind all my projects. Reading this
+                should explain why I do things in certain ways.<br>
+                <b>About Me:</b> Should be self-explanatory.<br><br>
+
+                Also, there are at least three easter eggs scattered throughout my posts within this website. I'll give you a freebie, click on that giant gold button.
+                The others will not be this easy to find, so good luck!
+            </p>
+        </div>
+        <div class="bottom">
+            <ul>
+                <li><a href="#">Test Sites</a></li> 
+                <li><a href="#">Web Scrapers</a></li>
+                <li><a onclick="nuke();">Nothing to see here</a></li>
+                <li><a href="#">What is this?</a></li>
+                <li><a target="_blank" href="https://linkedin.com/in/dak-cc/">Linkedin</a></li>
+            </ul>
+        </div>
     </body>
 </html>
