@@ -76,11 +76,20 @@ body {
 }
 
 .middle {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Courier New', Courier, monospace;
     font-size: 30px;
     color: white;
     display: grid;
     place-content: center;
+}
+
+.middle-subpages {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .middle .content {
@@ -89,11 +98,93 @@ body {
     width: 0;
     border-right: 2px solid;
     border-color: white;
-    animation: typing;
     animation-duration: 1s;
     animation-timing-function: steps(13, end);
     animation: typing 1s steps(13, end) forwards, blinking 1s infinite;
 }
+
+.middle-subpages .content-hacks {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.middle-subpages .content-archive {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.middle-subpages .title-mission {
+    margin: 0;
+    color: white;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.middle-subpages .subtitle-mission {
+    margin: 0;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.middle-subpages .content-mission {
+    color: white;
+    font-size: 16px;
+    margin:2%;
+    display: flex;
+    justify-content: center;
+}
+
+.middle-subpages .content-mission .actual-content-mission {
+    display: flex;
+    justify-content: center;
+}
+
+.middle-subpages .title-about {
+    margin: 0;
+    color: white;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.middle-subpages .content-about {
+    color: white;
+    font-size: 16px;
+    margin:2%;
+    display: flex;
+    justify-content: center;
+ }
+
+.middle-subpages .content-about .actual-content-about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.middle-subpages .content-about .actual-content-about .stuff .hidden{
+    visibility: hidden;
+}
+
+.middle-subpages .content-about .actual-content-about .stuff a:hover .hidden{
+    visibility: visible;
+    text-decoration: none;
+    cursor: default;
+    color: white;
+}
+
+.middle-subpages .content-about .actual-content-about .contacts a{
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+}
+
+ .middle-subpages .content-current {
+    overflow: hidden;
+    white-space: nowrap;
+ }
 
 @keyframes typing {
     from { width: 0% }
@@ -118,6 +209,10 @@ body {
     width: 69%;
     border: 3px dashed #fff;
     padding: 2%;
+}
+
+.middle-content p .note{
+    color: red;
 }
 
 .bottom {
