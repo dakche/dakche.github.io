@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+        <link rel="icon" href="../D.png" type="image/x-icon">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <title>ProjectDCC</title>
+    </head>
+    <body>
+        <nav class="nav-top">
+            <div class="top">
+                <div class="top-left">
+                    <a href="index.html"><img src="../D.png" class="logo"></a>
+                </div>
+                <div class="top-center">
+                    <ul>
+                        <li><a href="../current/index.html">Recent Projects</a></li> 
+                        <li><a href="../archive/index.html">The Archives</a></li>
+                        <li><a href="../hack/index.html">Hacks</a></li>
+                        <li><a href="../mission.html">My Mission</a></li>
+                        <li><a href="../about.html">About Me</a></li>
+                    </ul>
+                </div>
+                <div class="top-right">
+                    <button class="clicky" target="_blank" onclick="window.location.href='https://www.youtube.com/watch?v=xvFZjo5PgG0';">Easter Egg!</button>
+                </div>
+            </div>
+        </nav>
+        <div class="middle-subpages">
+            <div class="title">
+                <h1 class="title-about">50W GaN Boost Converter</h1>
+                <div class="pic"><img src="boost.jpg"></div>
+            </div>
+            <div class="content-about">
+                <div class="actual-content-about">
+                    <div class="stuff">
+                        <u>Intro</u><br>
+                        I am very interested in power converters, and this project really taught me a lot.
+                        <br><br><u>Problem/Inspiration</u><br>
+                        This is a design project for my power electronics class in college. <br>
+                        <br><u>The Process</u><br>
+                        The plan was simple:<br>
+                        <em>1. Define the specifications (current ripple, voltage ripple, switching frequency, etc.).</em><br>
+                        <em>2. Select the most optimal inductor and capacitor from a list.</em><br>
+                        <em>3. Simulate the optimize the converter in LTSpice.</em><br>
+                        <em>4. Build the boost converter.</em><br>
+                        <em>5. Benchmark it.</em><br><br>
+                        LTSpice model:<br>
+                        <div class="pic2"><img src="spice.jpg"></div><br>
+                        Final Specs:<br>
+                        - 93.4% efficient at 50W output power (12V -> 24V)<br>
+                        - 666.7kHz switching frequency<br>
+                        - Less than 1% inductor current ripple<br>
+                        - Less than 1% output voltage ripple<br>
+                        If interested, here is the full report: <a href="report.pdf" class="links">Report</a><br>
+                        <br><u>Remarks</u><br>
+                        This was by far the most interesting school project I've ever done. Not only do I get to apply the skills I've learned,
+                        but I also get to mess around with a really high end MOSFET! The inductor is not board-soldered because there needed 
+                        to be wires so a current clamp could go around it to measure inductor current. The efficiency recorded at the specified 
+                        power level of 50W is 93.4%, which is pretty good already, but I think replacing the diodes with another GaN MOSFET and 
+                        making it a synchronous converter should get us a 2-3% efficiency boost. Also, the inductor will not be floating....<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

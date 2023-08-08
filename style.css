@@ -163,8 +163,18 @@ body {
     justify-content: center;
 }
 
-.middle-subpages .content-about .actual-content-about .stuff .hidden{
+.middle-subpages .content-about .actual-content-about .stuff {
+    width: 1000px;
+
+}
+
+.middle-subpages .content-about .actual-content-about .stuff .hidden {
     visibility: hidden;
+}
+
+.middle-subpages .content-about .actual-content-about .stuff .links {
+    color: white;
+    text-decoration: underline;
 }
 
 .middle-subpages .content-about .actual-content-about .stuff a:hover .hidden{
@@ -236,6 +246,24 @@ body {
 .middle-subpages .content-list .table-container .entry .pic{
     height: 400px;
     width: auto;
+}
+
+.middle-subpages .title .pic{
+    height: 500px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.middle-subpages .pic2{
+    width: auto;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+}
+
+.middle-subpages .title .pic img{
+    border: 2px solid white;
 }
 
 @keyframes typing {

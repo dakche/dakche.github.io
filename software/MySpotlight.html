@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+        <link rel="icon" href="../D.png" type="image/x-icon">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <title>ProjectDCC</title>
+    </head>
+    <body>
+        <nav class="nav-top">
+            <div class="top">
+                <div class="top-left">
+                    <a href="index.html"><img src="../D.png" class="logo"></a>
+                </div>
+                <div class="top-center">
+                    <ul>
+                        <li><a href="../current/index.html">Recent Projects</a></li> 
+                        <li><a href="../archive/index.html">The Archives</a></li>
+                        <li><a href="../hack/index.html">Hacks</a></li>
+                        <li><a href="../mission.html">My Mission</a></li>
+                        <li><a href="../about.html">About Me</a></li>
+                    </ul>
+                </div>
+                <div class="top-right">
+                    <button class="clicky" target="_blank" onclick="window.location.href='https://www.youtube.com/watch?v=xvFZjo5PgG0';">Easter Egg!</button>
+                </div>
+            </div>
+        </nav>
+        <div class="middle-subpages">
+            <div class="title">
+                <h1 class="title-about">Custom Windows Spotlight</h1>
+                <div class="pic"><img src="apod.jpg"></div>
+            </div>
+            <div class="content-about">
+                <div class="actual-content-about">
+                    <div class="stuff">
+                        <u>Intro</u><br>
+                        Windows introduced a feature called Windows Spotlight where every day, it would find interesting pictures on the internet and 
+                        use them as your lockscreen. It's cool and all, but what if you don't want landscape pictures all the time? Getting to choose 
+                        what type of pictures you want is better.
+                        <br><br><u>Problem/Inspiration</u><br>
+                        This project idea originally came as a request from a friend. She wanted her laptop's lock screen to update with NASA's
+                        Astronomy Picture of the Day (APoD). I thought it would be an interesting project so I
+                        decided to try building something. <br>
+                        <br><u>The Process</u><br>
+                        The plan was simple:<br>
+                        <em>1. Webscrape NASA's APoD website for that day's picture</em><br>
+                        <em>2. Save the picture.</em><br>
+                        <em>3. Update the lock screen.</em><br>
+                        <br><u>Remarks</u><br>
+                        Getting the APoD was easy enough, NASA's website wasn't particularly complex and the simple HTML made it
+                        easy to find the images I was looking for.<br>
+                        The program was written in Python as it had many libraries (BeautifulSoup) I can use to get a working product as fast as possible. 
+                        Including the time it took for me to learn how to use the library, steps 1 and 2 were done in a few hours.
+                        Step 3 was by far the most difficult and time-consuming, as it involved having me reverse-engineer and reserach how Windows Spotlight worked.
+                        Long story short, the answer was that it was practically impossible without having to dive into some obscure Windows source code. Instead, I
+                        got creative and found a different route I could take.<br>
+                        Windows allows you to set static lock screen pictures, so if I could find where that picture was stored, I could theoretically overwrite and 
+                        update that "static" picture and get a new picture every day! With that idea in mind, I wrote the complete Python script and used Windows Scheduler
+                        run that program every morning when I log in, successfully updating the picture every day.<br>
+                        However, there was still one last minor problem. Sometimes, the APoD is a video instead of a picture, so I added a minor patch that shows
+                        your favorite picture as the lock screen whenever the APoD is not a picture.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
