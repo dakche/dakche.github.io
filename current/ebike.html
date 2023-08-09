@@ -28,55 +28,58 @@
         </nav>
         <div class="middle-subpages">
             <div class="title">
-                <h1 class="title-about">A haggling EV Charger</h1>
-                <div class="pic"><img src="EVSE.jpg"></div>
+                <h1 class="title-about">Ebike Motor Controller</h1>
+                <div class="pic"><img src="EMC.jpg"></div>
             </div>
             <div class="content-about">
                 <div class="actual-content-about">
                     <div class="stuff">
                         <u>Intro</u><br>
-                        My parents got an electric car, and those things apparently need charging. This tells the story of how I built a fully custom Level 2 electric vehicle service equipment (EVSE aka EV charger) from scratch for (technically) less than $200 (cost of the plug and a few electrical terminals, I had everything else in my parts bin).
+                        Ebikes are bicycles with an electric motor. Very popular during COVID. I want one.
                         <br><br><u>Problem/Inspiration</u><br>
-                        We only had a Level 1 charger when we first bought the car. It's slow, but it was manageable because we didn't drive very much-- unless my parents had to drop me off at college. The round trip of 100 miles would require 3 consecutive nights of charging to fully replenish the battery.
-                        Why didn't we want to install a Level 2 charger immediately? There was another problem. Our house only had a 100A service, and the electrical panel was completely full. Getting a Level 2 EV charger installed would require a complete service upgrade on top of buying
-                        an Level 2 EVSE, setting us back almost $5000. Suddenly, Level 1 charging seemed like a very good idea...until one day I noticed the GFCI outlet that we typically use to charge the EV was no longer tripping when I tested it. I opened the outlet and found a nasty surprise.
-                        <div class="pic2"><img src="burnt.jpg"></div>
-                        And that's why using the quick-connects on the back of outlets is no longer allowed by the NEC. After that close call, I replaced the outlet and the burnt wire and decided that we needed a Level 2 charger...fast. And I had a plan. 
+                        I found a large commercial inkjet printer that was being scrapped, so I decided to open it up to see if there was anything worth salvaging.
+                        Indeed, printers are a great source of motors, and being an industrial-grade one, there are some fairly BIG motors. Specifically, the motor
+                        driving the ink pump was a sensored brushless motor as big as my hand and had a built in 8:1 gearbox that gave it lots of torque. This should be interesting.
                         <br>
                         <br><u>The Process</u><br>
                         The plan was simple:<br>
-                        <em>1. Research how the J1772 protocol works.</em><br>
-                        <em>2. Build an EVSE with a special switching circuit inside that can switch the 240VAC mains between the EV and the central air conditioner compressor.</em><br>
-                        <em>3. Mount everything up and make sure all connections are secure.</em><br>
+                        <em>1. Design some pulleys and a drive system for a bike</em><br>
+                        <em>2. Build a motor controller.</em><br>
                         <br>
-                        Yea, easier said than done.<br><br>
-                        The J1772 is simply a +12V/-12V PWM signal whose duty cycle gets adjusted based on the available amperage. Simple enough.<br><br> 
-                        The EVSE itself can be broken down into five major modules:<br>
-                        1. Pilot signal generator (lets the EV know how much current it can safely draw)<br>
-                        2. Safety circuitry (GFCI and ground detection)<br>
-                        3. The relays (to switch the power)<br>
-                        4. Communication (to negotiate with the central air controller for power)<br>
-                        5. Power (to power the circuitry)<br><br>
-                        Gallery + Speedrun (from left to right):<br>
-                        - Pilot signal generator schematic: typically done with a rail-to-rail op amp, but I don't have any of those. So I built a isolated half-bridge circuit instead using transistors and optocouplers salvaged from a <a href="srm.html" class="links">washing machine</a> and old VCR players.
-                        <br>- GFCI and ground detection: Current clamp + op amp circuit attached to the Arduino's external interrupt (highest priority). Ground detect is achieved with a variation of the transistor non-contact voltage testers: pulls Arduino pin to GND every time a voltage is detected.
-                        <br>- 40A single pole double throw (SPDT) relays salvaged from a <a href="UPS.html" class="links">UPS</a>. The coil voltage for these relays is 24V, so I used a boost converter module to ensure these guys got enough voltage.
-                        <br>- A pair of ESP-01S boards running ESPNOW for communication (one in the EVSE, the other in the <a href="thermostat.html" class="links">thermostat</a>).
-                        <br>- A desktop ATX power supply supplying high-current 3.3V for the ESP-01S, 5V to the Arduino, 12V for pilot HIGH and powering the boost converter that drives the relays, and -12V for pilot LOW.
+                        We start with some mechanical design stuff: a 2:1 V-belt reduction system. Why a V-belt? Cause that's what I had lying around.
+                        3D printed pulleys are pretty strong if they are being driven (typically because there's less force on them), but designing a driver pulley
+                        to be 3D printed was fairly difficult, as that pulley had to withstand a lot of force. <br>The original design of the driver pulley directly mounted
+                        to the D-shaft of the motor, which was pretty dumb in hindsight because PLA plastic is pretty soft compared to metal and there's a whole lot of force
+                        on the surrounding PLA when the motor is doing its job. So the D-hole quickly lost its "D" shape and I had to go back to the drawing board. My next idea
+                        was to design a pulley that would directly fit over the metal toothed pulley wheel that originally came with the motor.
                         <div class="gallery">
-                            <div class="pic2"><img src="powerbrick.jpg"></div>
-                            <div class="pic2"><img src="wires.jpg"></div>
+                            <div class="pic3"><video controls autoplay>
+                                <source src="slip.mp4" type="video/mp4"></video></div>
+                            <div class="pic3"><img src="toothedpulley.jpg"></div>
                         </div><br>
-                        Shoving everything in an old VCR player enclosure...man I really wished I made a proper PCB for this.<br>
-                        <div class="pic2"><img src="internals.jpg"></div>
-                        <br>Here's how I'm able to pull this off without overloading my electrical service:<br>
-                        Mains power will travel to the COM (common) terminal of the relay, the AC compressor will get hooked up to the NC (normally closed, so default) terminal, and the EV charging plug will get wired to the NO (normally open) terminal. If the EV wants to charge, the EVSE has to first let the thermostat know that it wants to charge (via the ESP-01S). If the AC is currently running, the thermostat will not respond, and the EVSE will wait.
-                        When the AC compressor turns off, the thermostat will notify the EVSE that it is safe to turn on, and only then will the relays click over to allow the EV to charge. <br><br>This system has both hardware and software redundancy to make sure nothing goes wrong. Consider the following cases:<br>
-                        <br>1. Communication between the two systems break down. The power is routed to the AC compressor by default, and the thermostat has the "right of way" so to speak. If the EVSE does not get permission from the thermostat to turn on, the relays will not switch the power and the EV will not charge.
-                        <br>2. In the unlikely case that things do go terribly wrong and the relays have to switch under full load (which puts stress on them), the relays are rated to switch a 40A load, which is oversized for the 30A circuit it is operating on.
-                        <br>3. Due to the way that I wired the system, it is physically impossible for both systems to be on at the same time, making it impossible to overload the branch.<br>
+                        Mechanical stuff done, let's do electrical. So I reused the MOSFETs originally found in the motor driver that was paired with that ink pump motor
+                        and created my own sensored 3 phase H-bridge brushless motor controller. The motor driver in the printer did not have any proper gate drivers present that I could reuse. 
+                        The high side switches were logic-level PMOS and the low side switches were logic-level NMOS directly driven by the microcontroller. Hey, if a 
+                        commercial product used this method, I should be able to use this method as well. Under this assumption, I proceeded to create what was probably the worst motor controller
+                        ever made. Take a look at the schematic of a single half-bridge and the remains of my board.<br>
+                        <div class="gallery">
+                            <div class="pic2"><img src="emcsch.jpg"></div>
+                            <div class="pic2"><img src="remains.jpg"></div>
+                        </div><br>
+                        Writing this as a more knowledgeable 19 year old, I realized that the ink pump motor didn't need to be particularly efficient or high-performing, so driving MOSFET gates through
+                        resistors and pull-up resistors was more than enough. However, this won't work for a ebike controller. Ebike controllers are high performance boards that either need a proper gate driver
+                        or at the very least, a totem-pole driver (which can be built using discrete components). Nevertheless, the initial results looked pretty good:<br>
+                        <div class="pic2"><video controls autoplay>
+                            <source src="spinup.mp4" type="video/mp4"></video></div>
+                        <br>
+                        The MOSFETs ran nice and cool, and everything seemed fine...until I tried running the motor at anything less than 100% power and the MOSFETs started to get hot. Like really hot. 19 year old me knows the reason why.
+                        See those orange wires coming out of the board to the Arduino? Yea, those directly drive the gates of the MOSFETs. I've committed the number one taboo of driving MOSFETs, 
+                        making the connection between the MOSFET gates and the "driver" as long as physically possible. While this was sufficient at max speed (100% duty cycle, slow switching frequency = a nice factor of motor rpm), as soon as I tried
+                        lowering the speed of the motor, the motor controller starts to do more switching (10 kHz, PWM duty cycle non-zero), the currents running in the long, parallel gate wires started inducing voltages into each other, causing random MOSFET turn ons and shoot-throughs.
+                        But 16 year old me didn't know that at the time, so he decided to set this project aside for future me to complete.<br>
+                        
                         <br><u>Remarks</u><br>
-                        To be continued in <a href="thermostat.html" class="links">part 2</a>.
+                        Future me to the rescue: Get proper gate drivers, make a proper PCB, and as a bonus, apply FOC control.
                          <br>
                     </div>
                 </div>
