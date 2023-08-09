@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+        <link rel="icon" href="../D.png" type="image/x-icon">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <title>ProjectDCC</title>
+    </head>
+    <body>
+        <nav class="nav-top">
+            <div class="top">
+                <div class="top-left">
+                    <a href="index.html"><img src="../D.png" class="logo"></a>
+                </div>
+                <div class="top-center">
+                    <ul>
+                        <li><a href="../current/index.html">Recent Projects</a></li> 
+                        <li><a href="../archive/index.html">The Archives</a></li>
+                        <li><a href="../hack/index.html">Hacks</a></li>
+                        <li><a href="../mission.html">My Mission</a></li>
+                        <li><a href="../about.html">About Me</a></li>
+                    </ul>
+                </div>
+                <div class="top-right">
+                    <button class="clicky" target="_blank" onclick="window.location.href='https://www.youtube.com/watch?v=xvFZjo5PgG0';">Easter Egg!</button>
+                </div>
+            </div>
+        </nav>
+        <div class="middle-subpages">
+            <div class="title">
+                <h1 class="title-about">Pacbot</h1>
+                <div class="pic"><img src="pacbot.jpg"></div>
+            </div>
+            <div class="content-about">
+                <div class="actual-content-about">
+                    <div class="stuff">
+                        <u>Intro</u><br>
+                        Whoo! College fun! It's great when you hang out with people smarter than you.
+                        <br><br><u>Problem/Inspiration</u><br>
+                        Pacbot is a competition where teams build little robots that play the game of Pacman. For this project, I was actually the mechanical lead (as I was the only one on the team who had a background in mechanical design) and I decided to listen in and learn from
+                        the electrical team (who know more than me regarding the competition and electrical design).
+                        <br>
+                        <br><u>The Process</u><br>
+                        The plan was- uh there's no plan this time, just tasks:<br>
+                        <em>1. Collaborate with the electrical team to discuss how the robot was going to be powered.</em><br>
+                        <em>2. Build a maze as fast as possible so the code can be tested.</em><br>
+                        <em>3. Oh yea, design the mechanics of the whole robot.</em><br>
+                        <br>
+                        The goal was to make the robot as compact and lightweight as possible. The main PCB was already designed and ordered without the mechanical design in mind, so I had to get creative
+                        and design around the PCB and also ensuring that the final robot was not much bigger than the PCB itself. I closely collaborated with the rest of the team to discuss dimensions and placement of the motors and wheels.<br><br>
+                        I suggested the use of 2 LiPo batteries in series instead of the proposed AA batteries to cut down on weight and size while greatly increasing the performance of the robot. The final product was no bigger than the PCB, and consisted of only three major parts:
+                        <br><br>1. The PCB
+                        <br>2. The main chassis (everything mounts to this)
+                        <br>3. Optimized battery holder (doubles as caster wheel standoffs)<br><br>
+                        Making parts that serve double duty is so satisfying.
+                        <div class="gallery">
+                            <div class="pic3"><img src="cad1.png"></div>
+                            <div class="pic3"><img src="cad2.png"></div>
+                            <div class="pic3"><img src="cad3.png"></div>
+                            <div class="pic3"><img src="cad4.png"></div>
+                        </div><br>
+                        Onto the maze.<br><br>
+                        This was a task that no one wanted to do but it was something that everyone needed. How do I make this as painless as possible?
+                        Let's tax everyone (of their time)! However, it would be a logistical nightmare if I had everyone quickly build consistent, complete walls of different shapes that were over 3 feet long.<br><br>
+                        Inspired by computer simulations of the Pacbot maze that the Algorithm team was working on, I realized that if I divided up the maze into individual cubes, 
+                        I could efficiently parallelize this task and the results would be much more consistent. It's much easier telling a team of 20 people to each make 10 cubes rather than getting them all to coordinate and make 10 different types of walls.<br>
+                        I designed a tessellating cube net that could be laser cut while remaining within tolerance. By varying the power for some cuts, I can effectively make scores and cuts, making it much easier to maintain consistency, as all the builder has to do is fold the cube along its score lines.<br>
+                        <div class="pic2"><img src="template.jpg"></div><br>
+                        Hours of laser cutter time and 2 meetings later, the maze was completed!
+                        <div class="gallery">
+                            <div class="pic2"><img src="maze.jpg"></div>
+                            <div class="pic2"><img src="mazegrouppic.jpg"></div>
+                        </div>
+                        <br><u>Remarks</u><br>
+                        I'm such a nerd. I get excited over some pieces of cardboard and a maze.
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

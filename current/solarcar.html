@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+        <link rel="icon" href="../D.png" type="image/x-icon">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <title>ProjectDCC</title>
+    </head>
+    <body>
+        <nav class="nav-top">
+            <div class="top">
+                <div class="top-left">
+                    <a href="index.html"><img src="../D.png" class="logo"></a>
+                </div>
+                <div class="top-center">
+                    <ul>
+                        <li><a href="../current/index.html">Recent Projects</a></li> 
+                        <li><a href="../archive/index.html">The Archives</a></li>
+                        <li><a href="../hack/index.html">Hacks</a></li>
+                        <li><a href="../mission.html">My Mission</a></li>
+                        <li><a href="../about.html">About Me</a></li>
+                    </ul>
+                </div>
+                <div class="top-right">
+                    <button class="clicky" target="_blank" onclick="window.location.href='https://www.youtube.com/watch?v=xvFZjo5PgG0';">Easter Egg!</button>
+                </div>
+            </div>
+        </nav>
+        <div class="middle-subpages">
+            <div class="title">
+                <h1 class="title-about">Papercraft RC Car</h1>
+                <div class="pic"><img src="papercraft.jpg"></div>
+            </div>
+            <div class="content-about">
+                <div class="actual-content-about">
+                    <div class="stuff">
+                        <u>Intro</u><br>
+                        My parents got an electric car, and those things apparently need charging. This tells the story of how I built a fully custom Level 2 electric vehicle service equipment (EVSE aka EV charger) from scratch for (technically) less than $200 (cost of the plug and a few electrical terminals, I had everything else in my parts bin).
+                        <br><br><u>Problem/Inspiration</u><br>
+                        We only had a Level 1 charger when we first bought the car. It's slow, but it was manageable because we didn't drive very much-- unless my parents had to drop me off at college. The round trip of 100 miles would require 3 consecutive nights of charging to fully replenish the battery.
+                        Why didn't we want to install a Level 2 charger immediately? There was another problem. Our house only had a 100A service, and the electrical panel was completely full. Getting a Level 2 EV charger installed would require a complete service upgrade on top of buying
+                        an Level 2 EVSE, setting us back almost $5000. Suddenly, Level 1 charging seemed like a very good idea...until one day I noticed the GFCI outlet that we typically use to charge the EV was no longer tripping when I tested it. I opened the outlet and found a nasty surprise.
+                        <div class="pic2"><img src="burnt.jpg"></div>
+                        And that's why using the quick-connects on the back of outlets is no longer allowed by the NEC. After that close call, I replaced the outlet and the burnt wire and decided that we needed a Level 2 charger...fast. And I had a plan. 
+                        <br>
+                        <br><u>The Process</u><br>
+                        The plan was simple:<br>
+                        <em>1. Research how the J1772 protocol works.</em><br>
+                        <em>2. Build an EVSE with a special switching circuit inside that can switch the 240VAC mains between the EV and the central air conditioner compressor.</em><br>
+                        <em>3. Mount everything up and make sure all connections are secure.</em><br>
+                        <br>
+                        Yea, easier said than done.<br><br>
+                        The J1772 is simply a +12V/-12V PWM signal whose duty cycle gets adjusted based on the available amperage. Simple enough.<br><br> 
+                        The EVSE itself can be broken down into five major modules:<br>
+                        1. Pilot signal generator (lets the EV know how much current it can safely draw)<br>
+                        2. Safety circuitry (GFCI and ground detection)<br>
+                        3. The relays (to switch the power)<br>
+                        4. Communication (to negotiate with the central air controller for power)<br>
+                        5. Power (to power the circuitry)<br><br>
+                        Gallery + Speedrun (from left to right):<br>
+                        - Pilot signal generator schematic: typically done with a rail-to-rail op amp, but I don't have any of those. So I built a isolated half-bridge circuit instead using transistors and optocouplers salvaged from a <a href="srm.html" class="links">washing machine</a> and old VCR players.
+                        <br>- GFCI and ground detection: Current clamp + op amp circuit attached to the Arduino's external interrupt (highest priority). Ground detect is achieved with a variation of the transistor non-contact voltage testers: pulls Arduino pin to GND every time a voltage is detected.
+                        <br>- 40A single pole double throw (SPDT) relays salvaged from a <a href="UPS.html" class="links">UPS</a>. The coil voltage for these relays is 24V, so I used a boost converter module to ensure these guys got enough voltage.
+                        <br>- A pair of ESP-01S boards running ESPNOW for communication (one in the EVSE, the other in the <a href="thermostat.html" class="links">thermostat</a>).
+                        <br>- A desktop ATX power supply supplying high-current 3.3V for the ESP-01S, 5V to the Arduino, 12V for pilot HIGH and powering the boost converter that drives the relays, and -12V for pilot LOW.
+                        <div class="gallery">
+                            <div class="pic2"><img src="powerbrick.jpg"></div>
+                            <div class="pic2"><img src="wires.jpg"></div>
+                        </div><br>
+                        Shoving everything in an old VCR player enclosure...man I really wished I made a proper PCB for this.<br>
+                        <div class="pic2"><img src="internals.jpg"></div>
+                        <br>Here's how I'm able to pull this off without overloading my electrical service:<br>
+                        Mains power will travel to the COM (common) terminal of the relay, the AC compressor will get hooked up to the NC (normally closed, so default) terminal, and the EV charging plug will get wired to the NO (normally open) terminal. If the EV wants to charge, the EVSE has to first let the thermostat know that it wants to charge (via the ESP-01S). If the AC is currently running, the thermostat will not respond, and the EVSE will wait.
+                        When the AC compressor turns off, the thermostat will notify the EVSE that it is safe to turn on, and only then will the relays click over to allow the EV to charge. <br><br>This system has both hardware and software redundancy to make sure nothing goes wrong. Consider the following cases:<br>
+                        <br>1. Communication between the two systems break down. The power is routed to the AC compressor by default, and the thermostat has the "right of way" so to speak. If the EVSE does not get permission from the thermostat to turn on, the relays will not switch the power and the EV will not charge.
+                        <br>2. In the unlikely case that things do go terribly wrong and the relays have to switch under full load (which puts stress on them), the relays are rated to switch a 40A load, which is oversized for the 30A circuit it is operating on.
+                        <br>3. Due to the way that I wired the system, it is physically impossible for both systems to be on at the same time, making it impossible to overload the branch.<br>
+                        <br><u>Remarks</u><br>
+                        To be continued in <a href="thermostat.html" class="links">part 2</a>.
+                         <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

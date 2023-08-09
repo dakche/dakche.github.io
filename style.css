@@ -262,6 +262,19 @@ body {
     justify-content: center;
 }
 
+.middle-subpages .pic3{
+    width: auto;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+.middle-subpages .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .middle-subpages .title .pic img{
     border: 2px solid white;
 }
